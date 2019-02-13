@@ -216,9 +216,7 @@ function goPage(page) {
 		case 'win':
 			//txtDistanceResult.visible = true;
 			defaultLifeCycle.setResult({
-				winCriteria: AQCore.WIN_CRITERIA_WIN, score: {
-					value: Number((playerData.distance * .0005).toFixed(1))
-				}, resultImageUrl: AQCore.Utils.relativeToAbsolutePath(_props.data.engagementInfo.backgroundBig)
+				winCriteria: AQCore.WIN_CRITERIA_WIN, resultImageUrl: AQCore.Utils.relativeToAbsolutePath(_props.data.engagementInfo.backgroundBig)
 			})
 			//defaultLifeCycle.join(null, _props.data.engagementInfo.backgroundBig, true, null)
 			txtInstruction.visible = true;

@@ -22,10 +22,19 @@ function initMain(_oData) {
 	buildInGameButton();
 	buildStartBuilding();
 
-	playSound('musicAmbient', true);
+
 	goPage('main');
-	defaultLifeCycle.informReady();
+
 	resizeCanvas();
+	//playSound('musicAmbient', true);
+	createjs.Tween.get({})
+		.wait(1000)
+		.call(
+			function () {
+				playSound('musicAmbient', true);
+			}.bind(this)
+		);
+
 }
 
 var windowW = windowH = 0;

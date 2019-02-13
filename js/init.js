@@ -46,10 +46,7 @@ $(function () {
 	resizeLoaderFunc();
 	//checkBrowser();
 
-	defaultLifeCycle.setAppData({
-		backgroundBig: "./assets/background.jpg",
 
-	});
 
 	this._onData = function (data) {
 		_oData._additionalInfo = data.engagementInfo;
@@ -57,6 +54,10 @@ $(function () {
 		_oData.shouldWin = data.shouldWin;
 		_oData.targetScore = data.targetScore
 		_oData.backgroundImage = _oData._additionalInfo.backgroundBig;
+		defaultLifeCycle.setAppData({
+			backgroundBig: _oData.backgroundImage,
+
+		});
 		//ADD PRELOADER
 		//  this.gotoMenu();
 		//_oPreloader = new CPreloader();
@@ -77,7 +78,7 @@ $(function () {
 	//setting call back handlers
 	defaultLifeCycle.setOnDataCallback(this._onData.bind(this));
 	defaultLifeCycle.setOnResetCallback(this._onReset.bind(this));
-
+	defaultLifeCycle.informLoaded();
 	if (_props.devt) {
 		//console.log(_props.data)
 		this._onData(_props.data)

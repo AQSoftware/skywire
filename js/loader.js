@@ -115,8 +115,10 @@ function handleProgress() {
  * 
  */
 function handleComplete() {
+	defaultLifeCycle.informReady();
 	toggleLoader(false);
 	initMain(_oData);
+
 };
 
 /*!
