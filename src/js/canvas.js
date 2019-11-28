@@ -24,7 +24,9 @@ function initGameCanvas(w, h) {
 }
 
 var canvasContainer, mainContainer, buildingContainer, gameContainer, humanContainer, resultContainer, shareContainer;
-var background, buttonStart, logo, scoreTitle, shareTopicTitle, buttonShare, buttonReplay, buttonBack, buttonFacebook, buttonTwitter, buttonGoogle, humanTopData, humanTopAnimation, humanBottomData, humanBottomAnimation, head, hBody, handL, handL1, handL2, handR, handR1, handR2, txtDistance, txtCountdown, txtInstruction, txtDistanceResult;
+var background, buttonStart, buttonShare, logo, scoreTitle, shareTopicTitle, buttonShare, buttonReplay, buttonBack, buttonFacebook, buttonTwitter, buttonGoogle, humanTopData, humanTopAnimation, humanBottomData, humanBottomAnimation, head, hBody, handL, handL1, handL2, handR, handR1, handR2;
+var txtDistance, txtCountdown, txtInstruction, txtDistanceResult, txtGameTitle, txtStart;
+///, txtScore;
 
 $.buildingClone = {};
 $.building = {};
@@ -46,12 +48,18 @@ function buildGameCanvas() {
 	//main
 	background = new createjs.Bitmap(loader.getResult("background"));
 	buttonStart = new createjs.Bitmap(loader.getResult("buttonStart"));
-	logo = new createjs.Bitmap(loader.getResult("logo"));
+	/// logo = new createjs.Bitmap(loader.getResult("logo"));
 	centerReg(buttonStart);
 
-	logo.y = canvasH / 100 * 12;
+	/// logo.y = canvasH / 100 * 12;
 	buttonStart.x = 200 + (canvasW / 100 * 44);
 	buttonStart.y = 450 + (canvasH / 100 * 50);
+	/// MMM
+	buttonStartShape = new createjs.Shape();
+
+	buttonStartHit = new createjs.Shape();
+	buttonStartHit.graphics.beginFill("#fff").rect(0, 0, 2*canvasW, 2*canvasH);
+	buttonStartShape.hitArea = buttonStartHit;	
 
 	scoreTitle = new createjs.Bitmap(loader.getResult("scoreTitle"));
 	buttonReplay = new createjs.Bitmap(loader.getResult("buttonReplay"));
@@ -197,6 +205,17 @@ function buildGameCanvas() {
 	txtResult.x = 75 + (canvasW / 2);
 	txtResult.y = canvasH / 100 * 25;
 
+	/// MMM
+/*	txtScore = new createjs.Text();
+	txtScore.font = "80px bebas_neueregular";
+	txtScore.color = "#ffffff";
+	txtScore.text = 0;
+	txtScore.textAlign = "center";
+	txtScore.textBaseline = 'alphabetic';
+	txtScore.x = 75 + (canvasW / 2);
+	txtScore.y = canvasH / 2 * 40; */
+	///
+
 	txtReach = new createjs.Text();
 	txtReach.font = "80px bebas_neueregular";
 	txtReach.color = "#ffffff";
@@ -215,7 +234,28 @@ function buildGameCanvas() {
 	txtDistanceResult.x = 200 + (canvasW / 2);
 	txtDistanceResult.y = canvasH / 100 * 40;
 
-	mainContainer.addChild(logo, txtReach, buttonStart);
+	/// MMM
+	txtGameTitle = new createjs.Text();
+	txtGameTitle.font = "150px bebas_neueregular";
+	txtGameTitle.color = "#0066cc";
+	txtGameTitle.text = _oData._additionalInfo.gameTitleCaption;
+	txtGameTitle.textAlign = "center";
+	txtGameTitle.textBaseline = 'alphabetic';
+	txtGameTitle.x = canvasW;
+	txtGameTitle.y = canvasH / 100 * 30;
+
+	txtStart = new createjs.Text();
+	txtStart.font = "40px bebas_neueregular";
+	txtStart.color = "#ffffff";
+	txtStart.text = _oData._additionalInfo.startCaption;
+	txtStart.textAlign = "center";
+	txtStart.textBaseline = 'alphabetic';
+	txtStart.x = (canvasW);
+	txtStart.y = canvasH / 100 * 40;
+///
+	mainContainer.addChild(txtGameTitle, txtReach, buttonStart, txtStart, buttonStartShape);
+		///, txtScore);
+	///mainContainer.addChild(logo, txtReach, buttonStart);
 	resultContainer.addChild(txtResult, txtDistanceResult);
 	shareContainer.addChild(shareTopicTitle, buttonBack, buttonFacebook, buttonTwitter, buttonGoogle);
 	humanContainer.addChild(hBody, handL, handL1, handL2, handR, handR1, handR2, head, humanBottomAnimation);

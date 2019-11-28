@@ -49,10 +49,12 @@ $(function () {
 
 
 	this._onData = function (data) {
+		/// console.log(data);
 		_oData._additionalInfo = data.engagementInfo;
-
-		_oData.shouldWin = data.shouldWin;
-		_oData.targetScore = data.targetScore
+		_oData.hasTargetScore = data.hasTargetScore;
+		_oData.difficultyLevel = data.difficultyLevel;
+		/// _oData.shouldWin = data.shouldWin;
+		///_oData.targetScore = data.targetScore
 		_oData.backgroundImage = _oData._additionalInfo.backgroundBig;
 		defaultLifeCycle.setAppData({
 			backgroundBig: _oData.backgroundImage,
@@ -66,13 +68,17 @@ $(function () {
 
 	this._onReset = function (newData) {
 		_oData._additionalInfo = newData.engagementInfo;
-		_oData.shouldWin = newData.shouldWin;
+		_oData.hasTargetScore = newData.hasTargetScore;
+		_oData.difficultyLevel = newData.difficultyLevel;
+
+		///_oData.shouldWin = newData.shouldWin;
 		_oData.background = _oData._additionalInfo.backgroundBig;
 		removeGameCanvas();
 		TweenMax.killAll();
 		createjs.Tween.removeAllTweens();
-		//checkBrowser();
-		initMain(_oData)
+		isLoaded = false;
+		checkBrowser();
+		// initMain(_oData)
 	}
 
 	//setting call back handlers

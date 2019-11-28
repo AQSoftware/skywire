@@ -9,6 +9,19 @@
 */
 function initPreload(_oData) {
 	var _additionalInfo = _oData._additionalInfo;
+	var _difficultyLevel = _oData.difficultyLevel;
+	if (_additionalInfo) {
+		if ((_oData.hasTargetScore)&&(_additionalInfo.targetScore)) {
+			playerData.targetScore = _additionalInfo.targetScore[_difficultyLevel-1];
+		}
+		if (_additionalInfo.winCaption) {
+			textWin = _additionalInfo.winCaption;
+		}
+		if (_additionalInfo.loseCaption) {
+			textLose = _additionalInfo.loseCaption;
+		}
+	}
+	console.log("_additionalInfo", _oData);
 	toggleLoader(true);
 
 	checkMobileEvent();
@@ -18,10 +31,11 @@ function initPreload(_oData) {
 	});
 	resizeGameFunc();
 
+
 	loader = new createjs.LoadQueue(false);
 	manifest = [{ src: 'assets/background.jpg', id: 'background' },
 	{ src: 'assets/button_start.png', id: 'buttonStart' },
-	{ src: 'assets/logo.png', id: 'logo' },
+	/// { src: 'assets/logo.png', id: 'logo' },
 
 	{ src: 'assets/score.png', id: 'scoreTitle' },
 	{ src: 'assets/button_replay.png', id: 'buttonReplay' },
@@ -48,6 +62,37 @@ function initPreload(_oData) {
 		manifest.push({ src: buildings_arr[n], id: 'building' + n })
 	}
 
+/// MMM
+	if (_additionalInfo.gameBackground) {
+		manifest.push({src: _additionalInfo.gameBackground, id: "background"})
+	}
+	if (_additionalInfo.playButton) {
+		manifest.push({src: _additionalInfo.playButton, id: "buttonStart"})
+	}
+	if (_additionalInfo.building) {
+		for (n = 0; n < _additionalInfo.building.length; n++) {
+			manifest.push({ src: _additionalInfo.building[n], id: 'building' + n })
+		}
+	}
+	if (_additionalInfo.head) {
+		manifest.push({src: _additionalInfo.head, id: "head"})
+	}
+	if (_additionalInfo.body) {
+		manifest.push({src: _additionalInfo.head, id: "body"})
+	}
+	if (_additionalInfo.handL1) {
+		manifest.push({src: _additionalInfo.handL1, id: "handL1"})
+	}
+	if (_additionalInfo.handL2) {
+		manifest.push({src: _additionalInfo.handL2, id: "handL2"})
+	}
+	if (_additionalInfo.handR1) {
+		manifest.push({src: _additionalInfo.handR1, id: "handR1"})
+	}
+	if (_additionalInfo.handR2) {
+		manifest.push({src: _additionalInfo.handR2, id: "handR2"})
+	}
+///
 	soundOn = true;
 	if ($.browser.mobile || isTablet) {
 		if (!enableMobileSound) {

@@ -1,0 +1,24 @@
+{
+"gameTitleCaption": "Skywire",
+"targetCaptionPlural": "Walk safely for #ts kms",
+"targetCaptionSingular": "Walk safely for #ts km",
+"startCaption": "Walk safely",
+"winCaption": "Score",
+"loseCaption": "Score",
+"startBackground": "http://example.com/startBackground.jpg",
+"gameBackground": "http://example.com/gameBackground.jpg",
+"playButton": "https://example.com/playButtonjpg",
+"building": ["https://example.com/building1.jpg", "https://example.com/building2.jpg",
+"https://example.com/building3.jpg", "https://example.com/building4.jpg",
+"https://example.com/building5.jpg"],
+"head": "https://example.com/head.jpg",
+"body": "https://example.com/ body.jpg",
+"handL1": "https://example.com/handL1.jpg",
+"handL2": "https://example.com/handL2.jpg",
+"handR1": "https://example.com/handR1.jpg",
+"handR2": "https://example.com/handR2.jpg",
+"targetScore": [1, 2, 3, 4, 5]
+}
+
+http://localhost/JSProjects/CreateJS/skywire/
+

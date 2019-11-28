@@ -7,6 +7,10 @@
  * GAME SETTING CUSTOMIZATION START
  * 
  */
+/// MMM
+var textWin = "Score";
+var textLose = "Score"; 
+///
 var countdown_arr = ['3', '2', '1', 'GO']; //game countdown text
 var distanceDisplay = '[NUMBER]km'; //distance display, [NUMBER] will replace with number
 var instructionDesktop = 'MOVE MOUSE LEFT/RIGHT TO BALANCE';
@@ -116,10 +120,14 @@ function buildGameButton(_oData) {
 	//main
 	buttonStart.cursor = "pointer";
 	buttonStart.addEventListener("mousedown", function (evt) {
+		//playSound('soundHeart');
+	//	goPage('game');
+	});
+	buttonStartShape.cursor = "pointer";
+	buttonStartShape.addEventListener("mousedown", function (evt) {
 		playSound('soundHeart');
 		goPage('game');
 	});
-
 	/*buttonReplay.cursor = "pointer";
 	buttonReplay.addEventListener("mousedown", function (evt) {
 		playSound('soundHeart');
@@ -178,8 +186,25 @@ function goPage(page) {
 
 	switch (page) {
 		case 'main':
+			console.log(playerData.targetScore, _oData.hasTargetScore);
+			if (playerData.targetScore != "" && _oData.hasTargetScore) {
+			///	if (_oData._additionalInfo.startCaption) {
+					var txt = "";
+					if (Number(playerData.targetScore) > 1) {
+						txt = _oData._additionalInfo.targetCaptionPlural.replace("#ts", playerData.targetScore)
+						txtStart.text = txt.replace("/s", "s")
+					} else {
+						txt = _oData._additionalInfo.targetCaptionSingular.replace("#ts", playerData.targetScore)
+						txtStart.text = txt.replace("/s", "")
+					}
+			///	} else {
+					///txtStart.text = "Serve " + playerData.targetScore + " drinks"
+			///	}
+			} else {
+				//	txtStart.text = "Serve as many drinks"
+			}
 
-			if (playerData.targetScore != "") txtReach.text = "Reach " + playerData.targetScore + "KM";
+///			if (playerData.targetScore != "") txtReach.text = "Reach " + playerData.targetScore + "KM";
 			stopGame();
 			toggleTransition(mainContainer, true);
 			break;
@@ -203,7 +228,9 @@ function goPage(page) {
 			stopGame();
 			saveGame(playerData.score);
 			txtResult.visible = true;
-			txtResult.text = "Game Over"
+			txtResult.text = textLose;
+		///	txtScore.visible = true;
+		///	txtScore.text = playerData.distance;
 			createjs.Tween.get({})
 				.wait(3000)
 				.call(function () {
@@ -214,9 +241,13 @@ function goPage(page) {
 			break;
 
 		case 'win':
-			//txtDistanceResult.visible = true;
+			txtDistanceResult.visible = true;
 			defaultLifeCycle.setResult({
-				winCriteria: AQCore.WIN_CRITERIA_WIN, resultImageUrl: AQCore.Utils.relativeToAbsolutePath(_props.data.engagementInfo.backgroundBig)
+				winCriteria: AQCore.WIN_CRITERIA_WIN, 
+				score: {
+					value: Number((playerData.distance * .0005).toFixed(1))
+				},	
+				resultImageUrl: AQCore.Utils.relativeToAbsolutePath(_props.data.engagementInfo.backgroundBig)
 			})
 			//defaultLifeCycle.join(null, _props.data.engagementInfo.backgroundBig, true, null)
 			txtInstruction.visible = true;
@@ -224,7 +255,10 @@ function goPage(page) {
 			stopGame();
 			saveGame(playerData.score);
 			txtResult.visible = true;
-			txtResult.text = "You did it!"
+			txtResult.text = textWin;
+		///	txtScore.visible = true;
+			console.log(playerData.distance);
+		///	txtScore.text = playerData.distance;
 			createjs.Tween.get({})
 				.wait(3000)
 				.call(function () {
