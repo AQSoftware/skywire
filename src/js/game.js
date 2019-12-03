@@ -219,7 +219,8 @@ function goPage(page) {
 			txtDistanceResult.visible = true;
 			defaultLifeCycle.setResult({
 				winCriteria: AQCore.WIN_CRITERIA_LOSE, score: {
-					value: Number((playerData.distance * .0005).toFixed(1))
+					///value: Number((playerData.distance * .0005).toFixed(1))
+					value: Math.round(Number(playerData.distance * .5))
 				}, resultImageUrl: AQCore.Utils.relativeToAbsolutePath(_props.data.engagementInfo.backgroundBig)
 			})
 			//	defaultLifeCycle.join(null, _props.data.engagementInfo.backgroundBig, false, null)
@@ -234,6 +235,7 @@ function goPage(page) {
 			createjs.Tween.get({})
 				.wait(3000)
 				.call(function () {
+					createjs.Sound.stop();
 					blurStage();
 					defaultLifeCycle.end();
 				}.bind(this))
@@ -245,7 +247,8 @@ function goPage(page) {
 			defaultLifeCycle.setResult({
 				winCriteria: AQCore.WIN_CRITERIA_WIN, 
 				score: {
-					value: Number((playerData.distance * .0005).toFixed(1))
+					///value: Number((playerData.distance * .0005).toFixed(1))
+					value: Math.round(Number(playerData.distance * .5))
 				},	
 				resultImageUrl: AQCore.Utils.relativeToAbsolutePath(_props.data.engagementInfo.backgroundBig)
 			})
@@ -262,6 +265,7 @@ function goPage(page) {
 			createjs.Tween.get({})
 				.wait(3000)
 				.call(function () {
+					createjs.Sound.stop();
 					blurStage();
 					defaultLifeCycle.end();
 				}.bind(this))

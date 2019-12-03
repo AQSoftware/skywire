@@ -63,6 +63,9 @@ function initPreload(_oData) {
 	}
 
 /// MMM
+	if (_additionalInfo.startBackground) {
+		manifest.push({src: _additionalInfo.startBackground, id: "background"})
+	}
 	if (_additionalInfo.gameBackground) {
 		manifest.push({src: _additionalInfo.gameBackground, id: "background"})
 	}
