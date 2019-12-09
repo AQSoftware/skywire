@@ -23,6 +23,8 @@ function playSound(target, loop){
 			createjs.Sound.play(target);
 		}
 	}
+	console.log("_isSoundMuted", _isSoundMuted);
+	createjs.Sound.muted = _isSoundMuted;
 }
 
 function stopSound(){

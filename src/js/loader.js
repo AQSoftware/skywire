@@ -22,7 +22,10 @@ function initPreload(_oData) {
 		}
 	}
 	console.log("_additionalInfo", _oData);
-	toggleLoader(true);
+	if (_firstStart) {
+		_firstStart = false;
+		toggleLoader(true);
+	}
 
 	checkMobileEvent();
 
