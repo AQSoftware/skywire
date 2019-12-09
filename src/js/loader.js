@@ -184,3 +184,78 @@ function toggleLoader(con) {
 		$('#mainLoader').hide();
 	}
 }
+
+  /// MMM
+  function checkDataImagesEquality(oldObj, newObj) {
+	if (!oldObj.engagementInfo && newObj.engagementInfo) {
+		console.log("FALSE 1");
+		return false;
+	}
+	if (oldObj.engagementInfo && !newObj.engagementInfo) {
+		console.log("FALSE 2");
+		return false;
+	}
+	if (oldObj.engagementInfo && newObj.engagementInfo) {
+		var oldEI = oldObj.engagementInfo;
+		var newEI = newObj.engagementInfo;
+		if (oldEI.startBackground !== newEI.startBackground ) {
+			console.log("FALSE 3");
+			return false;
+		}
+		if (oldEI.gameBackground !== newEI.gameBackground ) {
+			console.log("FALSE 4");
+			return false;
+		}
+		if (oldEI.building && !newEI.building) {
+			console.log("FALSE 5");
+			return false;
+		}
+		if (!oldEI.building && newEI.building) {
+			console.log("FALSE 6");
+			return false;
+		}
+		if (oldEI.building && newEI.building) {
+			if (oldEI.building.length != newEI.building.length) {
+				console.log("FALSE 7");
+				return false;
+			} else {
+				for (var i=0;i<newEI.building.length;i++) {
+					if (oldEI.building[i] != newEI.building[i]) {
+						console.log("FALSE 8");
+						return false;
+					}
+				}
+			}
+		}
+		if (oldEI.playButton !== newEI.playButton ) {
+			console.log("FALSE 9");
+			return false;
+		}
+		if (oldEI.head !== newEI.head ) {
+			console.log("FALSE 10");
+			return false;
+		}
+		if (oldEI.body !== newEI.body ) {
+			console.log("FALSE 11");
+			return false;
+		}
+		if (oldEI.handL1 !== newEI.handL1 ) {
+			console.log("FALSE 12");
+			return false;
+		}
+		if (oldEI.handL2 !== newEI.handL2 ) {
+			console.log("FALSE 13");
+			return false;
+		}
+		if (oldEI.handR1 !== newEI.handR1 ) {
+			console.log("FALSE 13");
+			return false;
+		}
+		if (oldEI.handR2 !== newEI.handR2 ) {
+			console.log("FALSE 13");
+			return false;
+		}
+	}
+	 return true;
+  }
+  ///

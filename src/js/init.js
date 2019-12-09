@@ -9,6 +9,8 @@ var bgImg;
 var _oData = {};
 var Events = AQCore.Events;
 var _isSoundMuted = false;
+var oldData = {};
+var sameImagesFlag = false;
 
 /*!
 * 
@@ -53,6 +55,9 @@ $(function () {
 
 	this._onData = function (data) {
 		console.log(data);
+	/// MMM !!!
+	oldData = JSON.parse(JSON.stringify(data));
+
 		//if (data.isSoundMuted) {
 				createjs.Sound.muted = data.isSoundMuted;
 				_isSoundMuted = data.isSoundMuted;
@@ -83,8 +88,19 @@ $(function () {
 		removeGameCanvas();
 		TweenMax.killAll();
 		createjs.Tween.removeAllTweens();
-		isLoaded = false;
-		checkBrowser();
+
+		if (checkDataImagesEquality(oldData, newData)) {
+			console.log("SAME DATA !!!");
+			sameImagesFlag = true;
+			handleComplete();
+		} else {
+			/// MMM !!!
+			oldData = JSON.parse(JSON.stringify(newData));
+			///
+			sameImagesFlag = false;
+			isLoaded = false;
+			checkBrowser();
+		}
 		// initMain(_oData)
 	}
 
@@ -171,6 +187,7 @@ function startPage() {
 		if (window.DeviceOrientationEvent) {
 			window.removeEventListener('deviceorientation', onDeviceOrientationLoad);
 		}
+
 		if (!isLoaded) {
 			isLoaded = true;
 			initPreload(_oData);
