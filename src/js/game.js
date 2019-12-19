@@ -20,7 +20,7 @@ var bottomRotateRange = 10; //player's bottom rotate range
 
 var falldownUpdate = 50; //fall down timer update
 var falldownPercent = 110; //fall down change with percent
-var falldownPercentMobile = 100; //mobile fall down change with percent
+var falldownPercentMobile = 110; //mobile fall down change with percent
 
 var buildingStartPosY = 40; //building start y with percent
 var buildingDistance = 500; //building distance
