@@ -19,8 +19,8 @@ var instructionMobile = 'TILT DEVICE LEFT/RIGHT TO BALANCE';
 var bottomRotateRange = 10; //player's bottom rotate range
 
 var falldownUpdate = 50; //fall down timer update
-var falldownPercent = 110; //fall down change with percent
-var falldownPercentMobile = 110; //mobile fall down change with percent
+var falldownPercent = 150; //fall down change with percent
+var falldownPercentMobile = 150; //mobile fall down change with percent
 
 var buildingStartPosY = 40; //building start y with percent
 var buildingDistance = 500; //building distance
@@ -299,7 +299,7 @@ function toggleTransition(obj, con) {
 function startGame() {
 	falldownInit = false;
 	playerData.distance = 0;
-	gameData.controlX = 0;
+	gameData.controlX = 200;
 	gameData.x = 0;
 	gameData.xEase = 0;
 	gameData.speed = 0;
@@ -318,6 +318,7 @@ function startGame() {
 
 	humanContainer.alpha = 0;
 	TweenMax.to(humanContainer, .5, { alpha: 1, overwrite: true });
+	console.log(gameData.controlX);
 }
 
 /*!
@@ -722,8 +723,12 @@ function updateCountdown() {
  * 
  */
 function updateOrientation(data) {
+	console.log("BBBBBBB");
 	var oData = Math.round(data);
-	gameData.controlX = (oData / 100 * canvasW);
+	/// gameData.controlX = (oData / 100 * canvasW);
+	var stageX = canvasW*Math.random();
+	gameData.controlX = stageX - (canvasW / 2);
+
 }
 
 var shockInterval = null;
