@@ -43,7 +43,7 @@ function buildGameCanvas() {
 	gameContainer = new createjs.Container();
 	humanContainer = new createjs.Container();
 	resultContainer = new createjs.Container();
-	shareContainer = new createjs.Container();
+//	shareContainer = new createjs.Container();
 
 	//main
 	background = new createjs.Bitmap(loader.getResult("background"));
@@ -167,7 +167,7 @@ function buildGameCanvas() {
 
 	mainContainer.y = -800;
 	resultContainer.y = -800;
-	shareContainer.y = -800;
+	// shareContainer.y = -800;
 
 	txtDistance = new createjs.Text();
 	txtDistance.font = "80px bebas_neueregular";
@@ -257,7 +257,7 @@ function buildGameCanvas() {
 		///, txtScore);
 	///mainContainer.addChild(logo, txtReach, buttonStart);
 	resultContainer.addChild(txtResult, txtDistanceResult);
-	shareContainer.addChild(shareTopicTitle, buttonBack, buttonFacebook, buttonTwitter, buttonGoogle);
+//	shareContainer.addChild(shareTopicTitle, buttonBack, buttonFacebook, buttonTwitter, buttonGoogle);
 	humanContainer.addChild(hBody, handL, handL1, handL2, handR, handR1, handR2, head, humanBottomAnimation);
 	gameContainer.addChild(humanContainer, txtDistance, txtCountdown, txtInstruction);
 	humanContainer.scaleX = humanContainer.scaleY = 0.8;
@@ -266,7 +266,8 @@ function buildGameCanvas() {
 	gameContainer.x = 90;
 	humanContainer.y = 200;
 
-	canvasContainer.addChild(background, buildingContainer, mainContainer, gameContainer, resultContainer, shareContainer, txtDistanceResult);
+	//canvasContainer.addChild(background, buildingContainer, mainContainer, gameContainer, resultContainer, shareContainer, txtDistanceResult);
+	canvasContainer.addChild(background, buildingContainer, mainContainer, gameContainer, resultContainer, txtDistanceResult);
 	stage.addChild(canvasContainer)
 
 	gameContainer.visible = false;

@@ -164,7 +164,7 @@ function checkBrowser() {
 		browserSupport = true;
 	}
 
-	if ($.browser.mobile || isTablet) {
+/*	if ($.browser.mobile || isTablet) {
 		if (window.DeviceOrientationEvent) {
 			browserSupport = false;
 			window.addEventListener('deviceorientation', onDeviceOrientationLoad);
@@ -174,7 +174,18 @@ function checkBrowser() {
 	}
 	setTimeout(function () {
 		startPage();
-	}, 500);
+	}, 500);*/
+	
+	if(browserSupport){
+		if(!isLoaded){
+			isLoaded=true;
+			console.log()
+			initPreload(_oData);
+		}
+	}else{
+		//browser not support
+		$('#notSupportHolder').show();
+	}
 }
 
 /*!
@@ -182,7 +193,7 @@ function checkBrowser() {
  * START PAGE - This is the function that runs to start the page
  * 
  */
-function startPage() {
+/*function startPage() {
 	if (browserSupport) {
 		if (window.DeviceOrientationEvent) {
 			window.removeEventListener('deviceorientation', onDeviceOrientationLoad);
@@ -196,7 +207,7 @@ function startPage() {
 		//browser not support
 		$('#notSupportHolder').show();
 	}
-}
+}*/
 
 /*!
  * 
