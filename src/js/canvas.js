@@ -259,7 +259,8 @@ function buildGameCanvas() {
 	resultContainer.addChild(txtResult, txtDistanceResult);
 //	shareContainer.addChild(shareTopicTitle, buttonBack, buttonFacebook, buttonTwitter, buttonGoogle);
 	humanContainer.addChild(hBody, handL, handL1, handL2, handR, handR1, handR2, head, humanBottomAnimation);
-	gameContainer.addChild(humanContainer, txtDistance, txtCountdown, txtInstruction);
+///	gameContainer.addChild(humanContainer, txtDistance, txtCountdown, txtInstruction);
+	gameContainer.addChild(humanContainer, txtDistance, txtCountdown);
 	humanContainer.scaleX = humanContainer.scaleY = 0.8;
 	resultContainer.x = 120;
 	mainContainer.x = 0;
