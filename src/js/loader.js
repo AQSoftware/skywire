@@ -8,7 +8,10 @@
 * 
 */
 function initPreload(_oData) {
-	var _additionalInfo = _oData._additionalInfo;
+	if (defAssetsLoaded) {
+		var _additionalInfo = _oData._additionalInfo;
+	}
+///	var _additionalInfo = _oData._additionalInfo;
 	var _difficultyLevel = _oData.difficultyLevel;
 	if (_additionalInfo) {
 		if ((_oData.hasTargetScore)&&(_additionalInfo.targetScore)) {
@@ -21,7 +24,8 @@ function initPreload(_oData) {
 			textLose = _additionalInfo.loseCaption;
 		}
 	}
-	console.log("_additionalInfo", _oData);
+	console.log("Init Preload");
+	//console.log("_additionalInfo", _oData);
 	if (_firstStart) {
 		_firstStart = false;
 		toggleLoader(true);
@@ -65,38 +69,40 @@ function initPreload(_oData) {
 		manifest.push({ src: buildings_arr[n], id: 'building' + n })
 	}
 
-/// MMM
-	if (_additionalInfo.startBackground) {
-		manifest.push({src: _additionalInfo.startBackground, id: "background"})
-	}
-	if (_additionalInfo.gameBackground) {
-		manifest.push({src: _additionalInfo.gameBackground, id: "background"})
-	}
-	if (_additionalInfo.playButton) {
-		manifest.push({src: _additionalInfo.playButton, id: "buttonStart"})
-	}
-	if (_additionalInfo.building) {
-		for (n = 0; n < _additionalInfo.building.length; n++) {
-			manifest.push({ src: _additionalInfo.building[n], id: 'building' + n })
+	/// MMM
+	if (defAssetsLoaded) {
+		if (_additionalInfo.startBackground) {
+			manifest.push({src: _additionalInfo.startBackground, id: "background"})
 		}
-	}
-	if (_additionalInfo.head) {
-		manifest.push({src: _additionalInfo.head, id: "head"})
-	}
-	if (_additionalInfo.body) {
-		manifest.push({src: _additionalInfo.head, id: "body"})
-	}
-	if (_additionalInfo.handL1) {
-		manifest.push({src: _additionalInfo.handL1, id: "handL1"})
-	}
-	if (_additionalInfo.handL2) {
-		manifest.push({src: _additionalInfo.handL2, id: "handL2"})
-	}
-	if (_additionalInfo.handR1) {
-		manifest.push({src: _additionalInfo.handR1, id: "handR1"})
-	}
-	if (_additionalInfo.handR2) {
-		manifest.push({src: _additionalInfo.handR2, id: "handR2"})
+		if (_additionalInfo.gameBackground) {
+			manifest.push({src: _additionalInfo.gameBackground, id: "background"})
+		}
+		if (_additionalInfo.playButton) {
+			manifest.push({src: _additionalInfo.playButton, id: "buttonStart"})
+		}
+		if (_additionalInfo.building) {
+			for (n = 0; n < _additionalInfo.building.length; n++) {
+				manifest.push({ src: _additionalInfo.building[n], id: 'building' + n })
+			}
+		}
+		if (_additionalInfo.head) {
+			manifest.push({src: _additionalInfo.head, id: "head"})
+		}
+		if (_additionalInfo.body) {
+			manifest.push({src: _additionalInfo.head, id: "body"})
+		}
+		if (_additionalInfo.handL1) {
+			manifest.push({src: _additionalInfo.handL1, id: "handL1"})
+		}
+		if (_additionalInfo.handL2) {
+			manifest.push({src: _additionalInfo.handL2, id: "handL2"})
+		}
+		if (_additionalInfo.handR1) {
+			manifest.push({src: _additionalInfo.handR1, id: "handR1"})
+		}
+		if (_additionalInfo.handR2) {
+			manifest.push({src: _additionalInfo.handR2, id: "handR2"})
+		}
 	}
 ///
 	soundOn = true;
@@ -166,10 +172,17 @@ function handleProgress() {
  * 
  */
 function handleComplete() {
-	defaultLifeCycle.informReady();
-	toggleLoader(false);
-	initMain(_oData);
-
+	if (!defAssetsLoaded) {
+		toggleLoader(false);
+		defAssetsLoaded = true;
+		//setting call back handlers
+		defaultLifeCycle.informLoaded();
+	} else {
+		if (_oData.hasTargetScore && _oData.targetScore) {
+			defaultLifeCycle.informReady();
+			initMain(_oData);
+		}
+	}
 };
 
 /*!

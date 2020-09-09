@@ -182,11 +182,11 @@ function goPage(page) {
 
 	toggleTransition(mainContainer, false);
 	toggleTransition(resultContainer, false);
-//	toggleTransition(shareContainer, false);
+	toggleTransition(shareContainer, false);
 
 	switch (page) {
 		case 'main':
-		//	console.log(playerData.targetScore, _oData.hasTargetScore);
+			console.log(playerData.targetScore, _oData.hasTargetScore);
 			if (playerData.targetScore != "" && _oData.hasTargetScore) {
 			///	if (_oData._additionalInfo.startCaption) {
 					var txt = "";
@@ -273,7 +273,7 @@ function goPage(page) {
 
 		case 'share':
 			txtDistanceResult.visible = true;
-//			toggleTransition(shareContainer, true);
+			toggleTransition(shareContainer, true);
 			break;
 	}
 }

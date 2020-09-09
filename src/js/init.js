@@ -11,6 +11,7 @@ var Events = AQCore.Events;
 var _isSoundMuted = false;
 var oldData = {};
 var sameImagesFlag = false;
+var defAssetsLoaded = false;
 
 /*!
 * 
@@ -49,7 +50,7 @@ $(function () {
 		resizeLoaderFunc();
 	});
 	resizeLoaderFunc();
-	//checkBrowser();
+	checkBrowser();
 
 
 
@@ -64,17 +65,24 @@ $(function () {
 		//}  
 		_oData._additionalInfo = data.engagementInfo;
 		_oData.hasTargetScore = data.hasTargetScore;
+		_oData.argetScore = data.targetScore
 		_oData.difficultyLevel = data.difficultyLevel;
 		/// _oData.shouldWin = data.shouldWin;
+		if (_oData.hasTargetScore) {
+			_oData.targetScore = _oData._additionalInfo.targetScore[_oData.difficultyLevel-1];
+		}
 		///_oData.targetScore = data.targetScore
-		_oData.backgroundImage = _oData._additionalInfo.backgroundBig;
-		defaultLifeCycle.setAppData({
-			backgroundBig: _oData.backgroundImage,
+		if (_oData._additionalInfo.backgroundBig) {
+			_oData.backgroundImage = _oData._additionalInfo.backgroundBig;
+			defaultLifeCycle.setAppData({
+				backgroundBig: _oData.backgroundImage,
 
-		});
+			});
+		}
 		//ADD PRELOADER
 		//  this.gotoMenu();
 		//_oPreloader = new CPreloader();
+		isLoaded = false;
 		checkBrowser();
 	}
 
@@ -82,9 +90,12 @@ $(function () {
 		_oData._additionalInfo = newData.engagementInfo;
 		_oData.hasTargetScore = newData.hasTargetScore;
 		_oData.difficultyLevel = newData.difficultyLevel;
+		if (_oData.hasTargetScore) {
+			_oData.targetScore = _oData._additionalInfo.targetScore[_oData.difficultyLevel-1];
+		}
 
-		///_oData.shouldWin = newData.shouldWin;
-		_oData.background = _oData._additionalInfo.backgroundBig;
+		_oData.shouldWin = newData.shouldWin;
+		///_oData.background = _oData._additionalInfo.backgroundBig;
 		removeGameCanvas();
 		TweenMax.killAll();
 		createjs.Tween.removeAllTweens();
@@ -99,7 +110,7 @@ $(function () {
 			///
 			sameImagesFlag = false;
 			isLoaded = false;
-			checkBrowser();
+			//checkBrowser();
 		}
 		// initMain(_oData)
 	}
@@ -124,7 +135,7 @@ $(function () {
 	defaultLifeCycle.setOnDataCallback(this._onData.bind(this));
 	defaultLifeCycle.setOnResetCallback(this._onReset.bind(this));
 	defaultLifeCycle.setCallback(Events.ON_APP_STATE_CHANGE, onAppStateChange);
-	defaultLifeCycle.informLoaded();
+	///defaultLifeCycle.informLoaded();
 	if (_props.devt) {
 		//console.log(_props.data)
 		this._onData(_props.data)
@@ -164,7 +175,7 @@ function checkBrowser() {
 		browserSupport = true;
 	}
 
-/*	if ($.browser.mobile || isTablet) {
+	if ($.browser.mobile || isTablet) {
 		if (window.DeviceOrientationEvent) {
 			browserSupport = false;
 			window.addEventListener('deviceorientation', onDeviceOrientationLoad);
@@ -174,18 +185,7 @@ function checkBrowser() {
 	}
 	setTimeout(function () {
 		startPage();
-	}, 500);*/
-	
-	if(browserSupport){
-		if(!isLoaded){
-			isLoaded=true;
-			console.log()
-			initPreload(_oData);
-		}
-	}else{
-		//browser not support
-		$('#notSupportHolder').show();
-	}
+	}, 500);
 }
 
 /*!
@@ -193,7 +193,7 @@ function checkBrowser() {
  * START PAGE - This is the function that runs to start the page
  * 
  */
-/*function startPage() {
+function startPage() {
 	if (browserSupport) {
 		if (window.DeviceOrientationEvent) {
 			window.removeEventListener('deviceorientation', onDeviceOrientationLoad);
@@ -207,7 +207,7 @@ function checkBrowser() {
 		//browser not support
 		$('#notSupportHolder').show();
 	}
-}*/
+}
 
 /*!
  * 
